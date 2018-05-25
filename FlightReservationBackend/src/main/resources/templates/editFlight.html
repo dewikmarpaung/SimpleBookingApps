@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="layout :: head">
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{css/style.css}" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery-ui.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
+<title>Flight Reservation</title>
+</head>
+<body>
+	<div class="container">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>
+							Update <b>Flight</b>
+						</h2>
+					</div>
+					<form th:action="@{/save-flight}" th:object="${flight}"
+						method="POST">
+						<input type="hidden" th:field="*{flightId}"/>
+						<div class="form-group col-md-6">
+							<label for="departure_city">Departure City</label> <select
+								id="departureCity" class="form-control" th:object="${allCity}"
+								th:required="required" th:name="departure">
+								<option disabled selected value>-- Select Departure
+									City --</option>
+								<option th:each="city : ${allCity}" th:value="${city.name}"
+									th:text="${city.name}" ></option>
+							</select>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="destination_city">Destination City</label> <select
+								id="destinationCity" class="form-control"th:object="${allCity}"
+								th:required="required" th:name="destination">
+								<option disabled selected value>-- Select Destination
+									City --</option>
+								<option th:each="city : ${allCity}" th:value="${city.name}"
+									th:text="${city.name}"></option>
+							</select>
+						</div>
+						
+						
+						<div class="form-group col-md-6">
+							<label for="airlines">Airline</label> <select
+								id="airlines" class="form-control"th:object="${allAirlines}"
+								th:required="required" th:name="airline">
+								<option disabled selected value>-- Select Destination
+									City --</option>
+								<option th:each="a : ${allAirlines}" th:value="${a.name}"
+									th:text="${a.name}"></option>
+							</select>
+						</div>
+						
+
+						<div class="form-group col-md-6">
+							<label for="seat">Seat Category</label> <select
+								id="seat" class="form-control" 
+								th:object="${allSeat}" th:required="required"
+								th:name="categorySeat">
+								<option disabled selected>-- Select Seat Category --</option>
+								<option th:each="s : ${allSeat}"
+									th:value="${s.seatName}" th:text="${s.seatName}" ></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Departure Date</label> <input type="text" id="tgl"
+								class="form-input" th:field="*{departure_date}" placeholder="Tanggal Pembawaan" />
+						</div>
+						<div class="form-group">
+							<label>Price</label> <input type="text" class="form-control" th:field="*{price}" placeholder = "*{price}"
+								required>
+						</div>
+
+						<div>
+							<input type="submit" class="btn btn-success" value="Update">
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	<div th:replace="layout :: script"></div>
+	<script th:inline="javascript">
+		$(document).ready(function() {
+			$('#tgl').datepicker({
+				format : "dd/mm/yyyy"
+			});
+		});
+	</script>
+</body>
+</html>

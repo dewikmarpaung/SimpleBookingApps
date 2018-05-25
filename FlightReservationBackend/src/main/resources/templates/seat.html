@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="layout :: head">
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{css/style.css}" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery-ui.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
+<title>Flight Reservation</title>
+</head>
+<body>
+	<div class="container">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>
+							Manage <b>Seat</b>
+						</h2>
+					</div>
+					<div class="col-sm-6">
+						<a href="/create-seat" class="btn btn-success"><span>Add
+								Seat</span></a>
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>ID Seat</th>
+						<th>Seat Category</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="f : ${allSeat}">
+						<td th:text="${f.seatId}"></td>
+						<td th:text="${f.seatName}"></td>
+						<td><a style="font-size: 12px" th:object="${seat}" th:href="@{/delete-seat/{id}(id=${f.seatId})}"><span>Delete</span></a>
+						<a style="font-size: 12px" th:object="${seat}" th:href="@{/edit-seat/{id}(id=${f.seatId})}"><span>Edit</span></a>
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+	</div>
+</body>
+</html>
