@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <title>Contact Detail</title>
+    
+    <script type='text/javascript'>
+        function addFields(){
+            // Number of inputs to create
+            var number = document.getElementById("passenger").value;
+            // Container <div> where dynamic content will be placed
+            var container = document.getElementById("container");
+            // Clear previous contents of the container
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++){
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Passenger " + (i+1)));
+                
+                var select = document.createElement("select");
+                select.className = "form-control";
+                select.name = "title" + i;
+                var option1 = document.createElement("option");
+                var option2 = document.createElement("option");
+                var option3 = document.createElement("option");
+                option1.text = "Mrs.";
+                select.add(option1);
+                option2.text = "Mr.";
+                select.add(option2);
+                option3.text = "Ms.";
+                select.add(option3);
+                
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "passenger" + i;
+                input.className = "form-control";
+                
+                container.appendChild(select);
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+    
+</head>
+<body>
+<!-- //header -->
+<div class="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-left">
+                <h3>Flight Reservation</h3>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- //header -->
+
+<div class="body">
+    <nav class="navbar navbar-default">
+    <form th:action="@{/passenger}" method="post">
+    	<div class="panel-body">
+    		<h4>Contact Detail</h4>
+    		<div class="form-group">
+            	<label for="first_name">Full Name</label>
+                <input type="text" class="form-control" id="full_name" th:required="required" th:name="name"/>
+            </div>
+            <div class="form-group">
+            	<label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone" th:required="required" th:name="phone"/>
+            </div>
+            <div class="form-group">
+            	<label for="email">Email</label>
+                <input type="text" class="form-control" id="email" th:required="required" th:name="email"/>
+            </div>
+    	</div>
+    	
+    	<div class="panel-body">
+    		<h4>Passenger Detail</h4>
+    		<p style="color: chocolate;">Name as on ID Card / Passport / Driving License</p>
+            <div class="form-group">
+            	<!-- <label for="full_name">Full Name</label>
+                <input type="text" class="form-control" id="full_name" th:required="required" th:name="full_name"/> -->
+                <input type="text" class="form-control" id="passenger" th:name="passenger" th:required="required" value="">Number of passengers: <br />
+				<a id="filldetails" onclick="addFields()">Fill Details</a>
+    			<div id="container"></div>
+            </div>
+    	</div>
+    	
+    	 <div style="text-align: center">
+    	 	<input type="submit" id="continueBooking" class="btn btn-primary" value="Continue" ></input>
+    	 </div>
+    </form>
+    </nav>
+</div>
+
+<footer th:fragment="site-footer">
+&copy; PABSER,2018
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/jquery-ui.min.js}"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <title>Search Booking</title>
+</head>
+<body>
+<!-- //header -->
+<div class="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-left">
+                <h3><a th:href="@{/}">Flight Reservation</a></h3>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- //header -->
+
+<div class="body" >
+    <nav class="navbar navbar-default">
+    	<h4>Verification Detail</h4>
+    	<div class="form-group">
+           	<label >Booking Id : </label>
+            <label th:text="${payment.booking_id}" th:name="bookingId"></label>
+        </div>
+        <div class="form-group">
+           	<label >Total Price : </label>
+            <label th:text="${payment.totalPrice}" th:name="totalPrice"></label>
+        </div>
+        <div class="form-group">
+           	<label >Token : </label>
+            <label th:text="${payment.token}" th:name="token"></label>
+        </div>
+        <div class="form-group">
+           	<label >This booking has been verified! </label>
+        </div>
+        
+    </nav>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/jquery-ui.min.js}"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <title>Flight Reservation</title>
+    
+<script type='text/javascript'>
+function checkdate(){
+	var currentDate = document.getElementById("departureDate"); 
+	console.log("current date : " +currentDate.value); 
+	
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	
+	//2018-05-01
+	if(dd<10) {
+    	dd = '0'+dd
+	} 
+
+	if(mm<10) {
+    	mm = '0'+mm
+	} 
+	today = yyyy + '-' + mm + '-' + dd;
+	//document.write(today);
+	console.log("today : " + today);
+	
+	if (currentDate.value < today) {
+		alert('The  date can\'t be in the past. Please pick another date.');
+		document.getElementById("searchFlight").disabled=true;
+		return false;
+	} else {
+		document.getElementById("searchFlight").disabled=false;
+	}
+	//return true;
+}
+</script>
+
+<script>
+function checkcity() {
+	var departure = document.getElementById("departureCity"); 
+	var destination = document.getElementById("destinationCity"); 
+	
+	if (departure.value==destination.value) {
+		alert('Departure and destination cannot be same');
+		document.getElementById("searchFlight").disabled=true;
+		return false;
+	} else {
+		document.getElementById("searchFlight").disabled=false;
+	}
+}
+</script>
+
+</head>
+<body>
+<!-- header -->
+<div class="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-left">
+                <h3>Flight Reservation</h3>
+            </div>
+            <div class="navbar-custom-menu">
+            <!-- <div data-th-if="${isLogged==null}" data-th-remove="tag">
+			  <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/login}">Login</a></li>
+                    <li class="active"><a th:href="@{/register}">Register</a></li>
+                </ul>
+			</div>
+			<div data-th-if="${isLogged}" data-th-remove="tag">
+			  <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+			</div> -->
+			<ul class="nav navbar-nav navbar-right">
+					<!-- <li class="active"><a th:href="@{/checkpayment}">Check Payment</a></li> -->
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+         
+        </div>
+    </nav>
+</div>
+<!-- //header -->
+
+<!-- -->
+<div class="body">
+    <nav class="navbar navbar-default">
+        <form id="bookForm" th:action="@{/search}">
+            <div class="form-row">
+            <div onchange="checkcity()">
+                <div class="form-group col-md-6">
+                    <label for="departureCity">Departure City</label>
+                    <select id="departureCity" class="form-control" th:object="${city}"th:required="required" th:name="departure">
+                        <option disabled selected value> -- Select Departure City -- </option>
+                        <option th:each="city : ${city}"
+                                th:value="${city.city_id}"
+                                th:text="${city.name}" ></option>
+                    </select>
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="destinationCity">Destination City</label>
+                    <select id="destinationCity" class="form-control" th:object="${city}" th:required="required" th:name="destination">
+                        <option disabled selected value> -- Select Destination City -- </option>
+                        <option th:each="city : ${city}"
+                                th:value="${city.city_id}"
+                                th:text="${city.name}" ></option>
+                    </select>
+                </div>
+             </div>
+                <!-- <div class="form-group col-md-6">
+                    <label for="passenger">Passenger</label>
+                    <input type="text" class="form-control" id="passenger" th:required="required"/>
+                </div> -->
+                <div class="form-group col-md-6">
+                    <label for="categorySeat">Category Seat</label>
+                    <select id="categorySeat" class="form-control" th:object="${seatCategory}" th:name="categorySeat">
+                        <option disabled selected value> -- Select Category Seat -- </option>
+                        <!-- <option>Economy</option>
+                        <option>Business</option>
+                        <option>First Class</option> -->
+                        <option th:each="seatCategory : ${seatCategory}"
+                                th:value="${seatCategory.seatId}"
+                                th:text="${seatCategory.seatName}"></option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="departureDate">Departure Date</label>
+                    <input type="date" class="form-control" id="departureDate" th:name="departureDate" onchange="checkdate()" th:required="required" />
+                </div>
+                <div style="text-align: center">
+                	<input type="submit" id="searchFlight" class="btn btn-primary" value="Search Flight" />
+                </div>
+            </div>
+    	</form>
+    </nav>
+</div>
+<!-- -->
+
+<footer th:fragment="site-footer">
+&copy; PABSER,2018
+</footer>
+
+</body>
+</html>

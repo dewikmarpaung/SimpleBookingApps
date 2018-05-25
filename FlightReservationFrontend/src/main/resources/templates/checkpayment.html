@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/jquery-ui.min.js}"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <title>Check Payment</title>
+</head>
+<body>
+<!-- header -->
+<div class="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-left">
+                <h3>Flight Reservation</h3>
+            </div>
+			<ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+         
+        </div>
+    </nav>
+</div>
+<!-- //header -->
+
+<div class="body">
+    <nav class="navbar navbar-default">
+    <form th:action="@{/searchBooking}">
+    	<div class="form-group">
+           	<label for="token">Token</label>
+            <input type="text" placeholder="Enter token here" class="form-control" id="token" th:required="required" th:name="token"/>
+        </div>
+        
+        <div style="text-align: center">
+    	 	<input type="submit" class="btn btn-primary" value="Search Booking" ></input>
+    	 </div>
+    </form>
+    </nav>
+</div>
+
+</body>
+</html>

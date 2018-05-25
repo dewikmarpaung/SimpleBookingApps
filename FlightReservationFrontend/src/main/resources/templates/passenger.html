@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <title>Passenger Detail</title>
+</head>
+<body>
+<!-- //header -->
+<div class="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-left">
+                <h3><a th:href="@{/}">Flight Reservation</a></h3>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- //header -->
+
+<div class="body" >
+    <nav class="navbar navbar-default">
+    <form th:action="@{/bookingResult}" method="post">
+    	<div class="panel-body">
+    		<h4>User Detail</h4>
+    		<div class="form-group">
+            	<label for="first_name">Full Name : </label>
+                <label id="full_name" th:text="${booking.full_name}" th:name="name"></label>
+            </div>
+            <div class="form-group">
+            	<label for="first_name">Phone Number : </label>
+                <label id="full_name" th:text="${booking.phone}" th:name="phone"></label>
+            </div>
+            <div class="form-group">
+            	<label for="first_name">Email : </label>
+                <label id="full_name" th:text="${booking.email}" th:name="email"></label>
+            </div>
+    	</div>
+    	
+    	<div class="panel-body">
+    		<h4>Passenger Detail</h4>
+    		<div class="form-group" th:each="passanger : ${allpassanger}">
+            	<label th:text="${passanger}"></label>
+            </div>
+    	</div>
+    	
+    	<div class="panel-body">
+    		<h4>Airline Name</h4>
+    		<div class="form-group">
+    			<label>Airline Name : </label>
+                <label id="airline_name" th:text="${choosenAirline}"></label>
+            </div>
+    	</div>
+    	
+    	<div class="panel-body">
+    		<h4>Total Price</h4>
+    		<div class="form-group">
+    			<label>Total Price : </label>
+                <label id="total_price" th:text="${totalPrice}"></label>
+            </div>
+    	</div>
+
+		<div style="text-align: center">
+    	 	<input type="submit" id="continuePayment" class="btn btn-primary" value="Continue Payment" ></input>
+    	 </div>
+    </form>
+    </nav>
+</div>
+
+<footer th:fragment="site-footer">
+&copy; PABSER,2018
+</footer>
+
+</body>
+</html>
